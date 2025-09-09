@@ -1,0 +1,59 @@
+<div class="container">
+  <h1>Gestión de Productos</h1>
+
+  <!-- Formulario para crear/editar productos -->
+  <div class="product-form-card">
+    <h2>{{ editingProduct ? 'Editar Producto' : 'Crear Nuevo Producto' }}</h2>
+    <form [formGroup]="productForm" (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label for="name">Nombre:</label>
+        <input id="name" type="text" formControlName="name" placeholder="Nombre del producto">
+        <div *ngIf="productForm.get('name')?.invalid && productForm.get('name')?.touched" class="error-message">
+          El nombre es requerido.
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="description">Descripción:</label>
+        <textarea id="description" formControlName="description" placeholder="Descripción del producto"></textarea>
+      </div>
+
+      <div class="form-group">
+        <label for="price">Precio:</label>
+        <input id="price" type="number" formControlName="price" placeholder="Precio">
+        <div *ngIf="productForm.get('price')?.invalid && productForm.get('price')?.touched" class="error-message">
+          El precio es requerido y debe ser mayor que 0.
+        </div>
+      </div>
+
+      <div class="form-actions">
+        <button type="submit" [disabled]="!productForm.valid">
+          {{ editingProduct ? 'Actualizar' : 'Crear' }} Producto
+        </button>
+        <button type="button" (click)="resetForm()">Cancelar</button>
+      </div>
+    </form>
+  </div>
+
+  <!-- Lista de productos -->
+  <div class="product-list-card">
+    <h2>Lista de Productos</h2>
+    <div *ngIf="products.length === 0">
+      <p>No hay productos registrados. ¡Crea uno!</p>
+    </div>
+    <ul class="product-list">
+      <li *ngFor="let product of products" class="product-item">
+        <div class="product-details">
+          <h3>{{ product.name }}</h3>
+          <p>{{ product.description }}</p>
+          <p>Precio: ${{ product.price | number:'1.2-2' }}</p>
+        </div>
+        <div class="product-actions">
+          <button class="edit-button" (click)="editProduct(product)">Editar</button>
+          <button class="delete-button" (click)="deleteProduct(product.id)">Eliminar</button>
+        </div>
+      </li>
+    </ul>
+  </div>
+</div>
+
