@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "a4EAFz8H67eolZKQxNNw88UW9S+0lYvbEGQBBF108wY=",
+  "Source": "MyFullStackApp.Backend",
+  "BasePath": "_content/MyFullStackApp.Backend",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}
